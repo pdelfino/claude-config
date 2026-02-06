@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "Edit(*)",
+      "Write(*)",
+      "Read(*)",
+      "WebFetch(*)",
+      "WebSearch",
+      "Skill(*)",
+      "mcp__*"
+    ],
+    "deny": [
+      "Bash(git push:*)",
+      "Bash(git push)",
+      "Bash(gh pr merge:*)",
+      "Bash(deploy:*)",
+      "Bash(npm run deploy:*)",
+      "Bash(yarn deploy:*)",
+      "Bash(pnpm deploy:*)",
+      "Bash(vercel:*)",
+      "Bash(netlify deploy:*)",
+      "Bash(firebase deploy:*)",
+      "Bash(aws deploy:*)",
+      "Bash(gcloud app deploy:*)",
+      "Bash(kubectl apply:*)",
+      "Bash(helm install:*)",
+      "Bash(helm upgrade:*)"
+    ]
+  }
+}

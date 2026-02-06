@@ -8,7 +8,8 @@
         "ctrl+x ctrl+e": "chat:externalEditor",
         "ctrl+x ctrl+s": "chat:stash",
         "ctrl+p": "history:previous",
-        "ctrl+n": "history:next"
+        "ctrl+n": "history:next",
+        "ctrl+v": null
       }
     },
     {
