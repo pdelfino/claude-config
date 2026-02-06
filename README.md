@@ -1,43 +1,43 @@
-# Claude Code Configuration
+# Claude Config
 
-Personal configuration for [Claude Code](https://claude.ai/code) with Emacs-style keybindings.
+The leash I keep my AI on.
 
-## Keybindings
+## What's Here
 
-Custom keybindings optimized for Emacs users:
+**keybindings.json** - Because I refused to unlearn 20 years of Emacs muscle memory. `Ctrl+X Ctrl+E` or death.
 
-| Binding | Action | Description |
-|---------|--------|-------------|
-| `Ctrl+X Ctrl+E` | `chat:externalEditor` | Open input in external editor (Emacs) |
-| `Ctrl+X Ctrl+S` | `chat:stash` | Stash current input |
-| `Ctrl+P` | `history:previous` | Previous command in history |
-| `Ctrl+N` | `history:next` | Next command in history |
-| `Ctrl+X Ctrl+T` | `app:toggleTodos` | Toggle todo list |
+**settings.local.json** - Claude can do whatever it wants... except yeet code to production or push to GitHub. Trust, but verify. Actually, trust but `deny: ["Bash(git push:*)"]`.
 
-These are additive to Claude Code's defaults. The original bindings (`Ctrl+G` for editor, `Up`/`Down` for history) still work.
+## Philosophy
+
+```
+if (action.isLocal && action.isReversible) {
+  return "go wild, robot friend";
+} else if (action.couldEmbarrassMePublicly) {
+  return "let's talk about this first";
+}
+```
 
 ## Installation
 
-1. **Clone the repository:**
-   ```bash
-   git clone git@github.com:pdelfino/claude-config.git ~/projects/claude-config
-   ```
+```bash
+git clone git@github.com:pdelfino/claude-config.git ~/projects/claude-config
+ln -sf ~/projects/claude-config/keybindings.json ~/.claude/keybindings.json
+ln -sf ~/projects/claude-config/settings.local.json ~/.claude/settings.local.json
+```
 
-2. **Create symlink:**
-   ```bash
-   ln -sf ~/projects/claude-config/keybindings.json ~/.claude/keybindings.json
-   ```
+## The Deal
 
-3. **Restart Claude Code** for changes to take effect.
+| Claude Can | Claude Cannot |
+|------------|---------------|
+| Read anything | `git push` |
+| Write anything | Deploy to prod |
+| Run any command | Merge PRs |
+| Delete my files | Mass destruction via k8s/helm |
+| Break things locally | Break things publicly |
 
-## Customization
-
-Edit `keybindings.json` directly. See the [Claude Code keybindings documentation](https://code.claude.com/docs/en/keybindings) for available actions and contexts.
-
-### Validate with /doctor
-
-Run `/doctor` inside Claude Code to check for keybinding configuration issues.
+Basically: make all the mess you want in my house, just don't invite the neighbors to see it.
 
 ## Related
 
-- [zshrc](https://github.com/pdelfino/zshrc) - ZSH configuration with Emacs keybindings
+- [zshrc](https://github.com/pdelfino/zshrc) - Where I also force Emacs bindings on everything
