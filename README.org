@@ -11,6 +11,10 @@ Emacs muscle memory. =Ctrl+X Ctrl+E= or death.
 code to production or push to GitHub. Trust, but verify. Actually,
 trust but =deny: ["Bash(git push:*)"]=.
 
+*memory/* - Claude's auto-memory files. Symlinked from
+=~/.claude/projects/-Users-pedro/memory=. Where Claude writes down
+what it learned so it doesn't make the same mistakes twice. In theory.
+
 * Philosophy
 
 #+BEGIN_SRC javascript
@@ -27,6 +31,8 @@ trust but =deny: ["Bash(git push:*)"]=.
   ~/projects/claude-config/keybindings.json ~/.claude/keybindings.json
   ln -sf ~/projects/claude-config/settings.local.json
   ~/.claude/settings.local.json
+  ln -sf ~/projects/claude-config/memory
+  ~/.claude/projects/-Users-pedro/memory
 #+END_SRC
 
 * The Deal
