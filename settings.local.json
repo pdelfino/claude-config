@@ -8,7 +8,12 @@
       "WebFetch(*)",
       "WebSearch",
       "Skill(*)",
-      "mcp__*"
+      "mcp__*",
+      "mcp__clojure-mcp__list_nrepl_ports",
+      "mcp__clojure-mcp__clojure_inspect_project",
+      "mcp__clojure-mcp__clojure_eval",
+      "mcp__ide__getDiagnostics",
+      "mcp__clojure-mcp__clojure_edit"
     ],
     "deny": [
       "Bash(git push:*)",
@@ -27,5 +32,9 @@
       "Bash(helm install:*)",
       "Bash(helm upgrade:*)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "clojure-mcp-frontend",
+    "clojure-mcp-backend"
+  ]
 }
