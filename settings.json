@@ -29,31 +29,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/pedro/.claude/sounds/stop-ring.sh; afplay /Users/pedro/.claude/sounds/gong.wav &"
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/pedro/.claude/sounds/ring-loop.sh &"
-          },
-          {
-            "type": "command",
-            "command": "/usr/bin/curl -s -X POST -H 'Content-type: application/json' -d '{\"text\":\"Claude Code is waiting for your input\"}' \"$CLAUDE_SLACK_WEBHOOK_URL\" > /dev/null 2>&1 &"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/pedro/.claude/sounds/stop-ring.sh"
+            "command": "afplay /Users/pedro/.claude/sounds/gong.wav &"
           }
         ]
       }
