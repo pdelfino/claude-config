@@ -10,7 +10,8 @@ Emacs muscle memory. =Ctrl+X Ctrl+E= or death.
 *settings.json* - Global permissions for the home directory scope.
 All tools allowed except pushing, deploying, and publishing. Also
 configures hooks for sound notifications (gong on stop, looping ring
-on waiting for input) and Slack pings when Claude needs attention.
+on waiting for input, knock sound when asking a question) and Slack
+pings when Claude needs attention.
 
 *settings.local.json* - Project-level permissions with broader
 wildcards, explicit Clojure MCP tool access, and enabled MCP JSON
