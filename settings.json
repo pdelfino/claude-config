@@ -33,6 +33,17 @@
           }
         ]
       }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /Users/pedro/.claude/sounds/knock.wav &"
+          }
+        ]
+      }
     ]
   }
 }
