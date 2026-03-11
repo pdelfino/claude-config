@@ -58,4 +58,9 @@ the neighbors to see it.
 
 * Related
 
+- [[https://github.com/pdelfino/emacs-config][emacs-config]] - The Emacs setup this config rides on top of
+- [[https://github.com/pdelfino/karabiner-config][karabiner-config]] - Emacs keybindings system-wide on macOS
+- [[https://github.com/pdelfino/homerow-config][homerow-config]] - Click things without a mouse
+- [[https://github.com/pdelfino/iterm2-config][iterm2-config]] - iTerm2 terminal profile
 - [[https://github.com/pdelfino/zshrc][zshrc]] - Where I also force Emacs bindings on everything
+- [[https://github.com/pdelfino/macos-setup][macos-setup]] - The bootstrap that ties it all together
