@@ -1,6 +1,6 @@
 # claude-config
 
-![Pygmalion and Galatea](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Pygmalion_and_Galatea_MET_DT1969.jpg/960px-Pygmalion_and_Galatea_MET_DT1969.jpg)
+![Pygmalion and Galatea](./painting.jpg)
 
 *"Pygmalion and Galatea" (c. 1890) by Jean-Léon Gérôme — [Wikipedia](https://en.wikipedia.org/wiki/Pygmalion_and_Galatea_(G%C3%A9r%C3%B4me))*
 
