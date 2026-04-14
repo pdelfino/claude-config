@@ -16,8 +16,6 @@
       "mcp__clojure-mcp__clojure_edit"
     ],
     "deny": [
-      "Bash(git push:*)",
-      "Bash(git push)",
       "Bash(gh pr merge:*)",
       "Bash(deploy:*)",
       "Bash(npm run deploy:*)",

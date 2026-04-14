@@ -15,7 +15,6 @@
       "mcp__chrome-devtools__*"
     ],
     "deny": [
-      "Bash(git push*)",
       "Bash(git push --force*)",
       "Bash(gh pr merge*)",
       "Bash(*deploy*)",
