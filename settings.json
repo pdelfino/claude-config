@@ -53,6 +53,26 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mkdir -p \"$HOME/.claude/state\" && date +%s > \"$HOME/.claude/state/documents-last-seen\""
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/hooks/announce-new-documents.sh\""
+          }
+        ]
+      }
     ]
   },
   "effortLevel": "high"

@@ -13,7 +13,18 @@
       "mcp__clojure-mcp__clojure_inspect_project",
       "mcp__clojure-mcp__clojure_eval",
       "mcp__ide__getDiagnostics",
-      "mcp__clojure-mcp__clojure_edit"
+      "mcp__clojure-mcp__clojure_edit",
+      "Bash(mkdir -p ~/.claude/hooks ~/.claude/state)",
+      "Bash(/bin/ls -la ~/.claude/hooks ~/.claude/state)",
+      "Bash(date +%s)",
+      "Bash(/bin/ls -la ~/.claude/hooks/announce-new-documents.sh ~/.claude/state/documents-last-seen)",
+      "Bash(bash ~/.claude/hooks/announce-new-documents.sh)",
+      "Bash(echo \"=== exit: $? ===\")",
+      "Bash(/bin/cat ~/.claude/state/hook-debug.log)",
+      "Bash(/bin/cat ~/.claude/state/documents-last-seen)",
+      "Bash(rm -f ~/.claude/state/hook-debug.log)",
+      "Bash(/bin/cat ~/.claude/hooks/announce-new-documents.sh)",
+      "Bash(echo \"\\(script exit: $?\\)\")"
     ],
     "deny": [
       "Bash(gh pr merge:*)",
