@@ -24,7 +24,9 @@
       "Bash(/bin/cat ~/.claude/state/documents-last-seen)",
       "Bash(rm -f ~/.claude/state/hook-debug.log)",
       "Bash(/bin/cat ~/.claude/hooks/announce-new-documents.sh)",
-      "Bash(echo \"\\(script exit: $?\\)\")"
+      "Bash(echo \"\\(script exit: $?\\)\")",
+      "mcp__browsermcp__browser_snapshot",
+      "mcp__browsermcp__browser_click"
     ],
     "deny": [
       "Bash(gh pr merge:*)",

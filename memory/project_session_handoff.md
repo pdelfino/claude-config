@@ -2,101 +2,65 @@
 name: Rolling session handoff (cwd=/Users/pedro)
 description: Semantic snapshot of what shipped this session, what's pending, what to verify next
 type: project
-originSessionId: cf549334-1efa-4097-9e2c-d3d57b35bd41
+originSessionId: de966297-081a-423e-901c-61bb26c8243c
 ---
-# Session handoff — 2026-04-24 morning (continues 2026-04-23 evening)
+# Session handoff — 2026-04-30 afternoon
 
-This was a long, cross-repo session. Two days of work, summarized.
+Pedro paused mid-T5-filing to install Browser MCP and restart Claude Code. Resume picking up the T5 immediately on next session.
 
-## What shipped
+## ⚠️ Hot pause point
 
-### slidesmith (new project)
+Pedro is **mid-CRA-Web-Forms T5 filing**. Specifically: logged into CRA My Business Account, RZ profile `755367752RZ0001` selected, on the "How do you want to file?" page with **Web Forms + "use previously submitted .xml as template"** options selected. Has NOT yet uploaded the 2024 XML or hit submit.
 
-Repo: https://github.com/pdelfino/slidesmith (private). Three commits on main:
+**Full state + remaining steps documented in life-ops issue #59 latest comment (2026-04-30).** Read that first.
 
-| Commit | What |
-|---|---|
-| `53db0e2` | Initial README — vision, workflow, M1–M5 roadmap, stack-pending |
-| `5b13af6` | M1 prototype — parser, renderer, presenter, Tabler icons, favicon CLI, demo, Spring-in-Canada styles |
-| `5dff679` | M1.5 Fireship-format polish — click-to-advance, Shiki code blocks (`solarized-light`), auto-advance recording mode (`?mode=auto&pace=1.5`), slide cross-fade (opacity+scale), 3px progress gradient bar |
+Today is also **April 30, 2026 — T1 personal tax deadline**. T5 must finish before T1 can be filed correctly.
 
-Stack chosen autonomously: Vite + TypeScript + vanilla DOM + Tabler Icons + Shiki. No framework.
+## What shipped this session
 
-Issue #1 on slidesmith: research dump on Khan/3B1B/Fireship video tools, mapped to slidesmith feature opportunities. Conclusion: slidesmith is naturally Fireship-format-adjacent; M2+ priorities flow from that.
-
-### le-day-club issues touched
-
-- **#40 redirect** ledayclub.com → leday.club: **CLOSED**. GoDaddy domain forwarding live. Path-preservation is a known limitation (GoDaddy strips path); Cloudflare migration is the future fix if that ever bites.
-- **#42** Waiver acceptance flow + pre-filled PDF (digital + print-and-pen-sign tracks).
-- **#43** City filter — full vision, **downgraded to `when vibes allow`** after Pedro's "for now just a tagline" pivot.
-- **#44** Social media curation (haters / burned bridges).
-- **#45** Natural-language event creation wizard (Claude-leveraged).
-- **#46** Post-event Claude debrief + personalized follow-ups.
-- **#47** Social content generator pipeline.
-- **#68 (NEW today)** Site copy: Montreal tagline implementation — the simpler scope rescued from the #43 conversation.
-- **#69 (NEW today)** workers/email cleanup — `ALLOWED_ORIGINS` and broken README.
-
-### life-ops issues touched
-
-- **#39** Glove80 adoption — comment ping; structure unchanged.
-- **#48** Weekly Claude digest — created in earlier session.
-- **#49** Toronto PO box for canadian corp + personal Montreal address migration.
-- **#50** **HAIR-ON-FIRE** — Pagar advogado Mãozinha (also unblocks le-day-club #8).
-- **#51** Switched Anthropic billing to corporate card — created and closed-as-done in same turn.
-- **#52** Retheme iTerm2 + Emacs to "Spring in Canada" — palette source.
-- **#53** Therapist homework "minha semana" with physiological pillars.
-- **#54** Emacs `C-e` jumping to end of empty in Claude Code buffer.
-- **#55** Clipboard Emacs ↔ manager confusion.
-- **#56** Shottr keyboard-first + ~/Documents integration.
-- **#57** Config conflict audit (Karabiner / Homerow / iTerm / Emacs / Shottr / clipboard / macOS / Glove80).
-- **#58** slidesmith tracker — comments with M1 + M1.5 status.
-
-### Infrastructure changes
-
-- **`/peek` skill** at `~/.claude/skills/peek/SKILL.md` (created earlier in session).
-- **`UserPromptSubmit` hook** announcing new files in `~/Documents/` — wired into `~/.claude/settings.json`. Fix landed mid-session: BSD find silently truncates ISO 8601 with `T` separator → must use space separator. Now working.
-- **`SessionStart` hook** seeding the documents-last-seen state file so historical files don't flood the first prompt.
-- **Email worker** (`le-day-club/workers/email/`) deployed to Cloudflare. Secrets set: RESEND_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY. workers.dev subdomain registered.
-- **Anthropic env vars** (`~/.secure_env_vars`): split into `ANTHROPIC_API_KEY_PEDRO` (personal, org `70d950cf-…`) and `ANTHROPIC_API_KEY_TALLYFOR` (org `7a43e7a0-…`). Canonical `ANTHROPIC_API_KEY` deliberately unset so SDKs fail loudly. See `anthropic_accounts.md` memory file.
-
-## What's pending (acknowledged)
-
-The user explicitly asked at session-end: *"acho que teve alguma coisa que ficou pendente também. O que foi?"*
-
-| Item | Status | Now tracked at |
-|---|---|---|
-| **Montreal tagline on /events or homepage** | Discussed, copy proposed in EN/FR/PT, placement proposed (eyebrow above H1), **not executed**. I asked Pedro to confirm placement; conversation moved on. | le-day-club **#68** (NEW) |
-| **workers/email `ALLOWED_ORIGINS`** still points at `ledayclub.com` (old domain) instead of `leday.club` | Noted at deploy time; **not fixed** | le-day-club **#69** (NEW) |
-| **workers/email/README.md** still has paste-breaking inline `# comments` | Offered to fix; never executed | le-day-club **#69** (NEW) |
-| **slidesmith browser verification** for M1 + M1.5 | No `chrome-devtools` MCP available in either session; build green + dev-server-serves was the limit. Both commits explicitly flagged "NOT verified" in their commit messages and life-ops #58 comments. | Next session agenda — implicit in slidesmith roadmap |
-| **Hook test file** `~/Documents/test-hook-fix-verification.txt` | Cleaned up at session end (rm successful) | Done |
+- **life-ops #59 created** (hair-on-fire): T5 corp 2025 — $37,000 in dividends to file. PDF guide at `~/projects/personal-finance/canadian-corporation/bookkeeping/taxes/T5_2025_Filing_Guide.pdf`
+- **life-ops #55 closed**: clipboard/Maccy issue resolved (Karabiner now lets M-y → Maccy fire in Emacs)
+- **emacs-config commit `c8fa17c`**: eat color palette + dark doom-one theme. 1 ahead of origin/main, not pushed.
+- **karabiner commit `096066d`**: removed Emacs from Maccy hotkey exclusion. 1 ahead of origin/main, not pushed.
+- **le-day-club #80–#84**: 5 pitch issues created (Individuals, Couples, Enterprise, Investors, Partners)
+- **le-day-club #85**: Demo #0 launch runbook — Pedro-only manual steps + Claude-completable PRs
 
 ## Verify at next session start
 
-1. **Read** `.claude/session-end-state.md` for any project where the SessionEnd hook ran (deterministic snapshot).
-2. **slidesmith** primary task: `cd ~/projects/slidesmith && make dev` → Chrome → click through demo. Validate code highlighting (Shiki solarized-light), progress bar gradient, slide cross-fade smoothness, click-to-advance affordance, recording mode timing at `?mode=auto&pace=1.5`.
-3. **le-day-club** events page: a screenshot from Pedro on 2026-04-24 morning showed `localhost:3000/events/` working — the public events page (#10) is now in progress. Confirm with Pedro what state it's in.
-4. Confirm `~/Documents/test-hook-fix-verification.txt` is gone (it is, already verified).
-5. Sanity-check the hook on next prompt — should announce zero files (unless new screenshots dropped).
+1. **Browser MCP installed?** Run `claude mcp list` — should show a `browser` server. If yes, `mcp__browser__*` tools should be available in this session and the screenshot ping-pong is over. Pedro confirmed running `npx @browsermcp/mcp@latest` directly at 15:40 (which hangs — that's expected; that's not the install command). The actual install is `claude mcp add browser -s user -- npx @browsermcp/mcp@latest` plus the Chrome extension from browsermcp.io. Pedro then said "I installed it" — verify what state it's actually in.
+2. **T5 submitted?** Check `~/projects/personal-finance/canadian-corporation/bookkeeping/taxes/` for a new file matching `T5_2025_Submission_*.pdf` or `*.zip`. If present, Pedro finished without help; help him with T1 next.
+3. **emacs-config + karabiner pushed?** `git -C ~/projects/emacs-config status` and `git -C ~/.config/karabiner status` — both were 1 ahead of origin/main at session end.
 
-## Next tractable work (priority-ordered)
+## Next tractable work (priority order)
 
-1. **HAIR-ON-FIRE**: life-ops #50 (Mãozinha) — also unblocks le-day-club #8 (waiver lawyer review). Single message + payment.
-2. **HAIR-ON-FIRE**: le-day-club #8 (waiver review by lawyer). Hard deadline May 23.
-3. **Slidesmith browser verification** + any visual fixes from Pedro's feedback.
-4. **le-day-club critical-chain Demo #0**: #39 (live Stripe Payment Link), #38 (Stripe dry run), #7 (sign-in flows test), #6 (Stripe webhook worker), #4 (Google OAuth verification).
-5. **le-day-club #68** Montreal tagline (5-min cosmetic change).
-6. **le-day-club #69** workers/email cleanup (15-min infra hygiene).
-7. **Slidesmith M2** LLM-picked icons — needs personal Console billing upgrade (Evaluation tier blocks real usage).
+1. **Finish T5 2025 filing** (life-ops #59) — upload 2024 XML, change boxes to $37k / $42.55k / $3,842.31, submit, save confirmation. With Browser MCP active, can do it without screenshot ping-pong.
+2. **File T1 2025** immediately after — Box 11 → line 12000, Box 12 → line 40425. Today is the deadline.
+3. **Sanity check**: do calendar-2024 dividend resolutions sum to $30,000 (the 2024 T5 total)? If not, an amended 2024 T5 is a second hair-on-fire.
+4. **Life-ops braindump items** still uncreated (~12): divórcio Canada, Boston May trip logistics, carteira motorista QC, fechar CIBC, fechar cartão supermercado, CV NYC, refund evento R&B, project board IDEIAS repo, instalar impressora, co-living LDC, learning Claude at night. Pedro authorized creating these but conversation pivoted before — cross-reference earlier dedup analysis.
+5. **LDC landing page reframe** (le-day-club, separate repo): "A social fitness experience for grown-ups". Issue not yet created.
+6. **Push** emacs-config + karabiner commits to origin when convenient (Pedro hasn't asked yet).
 
-## PEDRO_AND_CLAUDE.md updates noticed today
+## Key references for T5 work
 
-- New rule on le-day-club: *"Always document blockers on GitHub. No verbal-only blockers. Use `status:waiting-on-pedro` / `status:blocked` / `status:waiting-external` labels + a comment."* Honored throughout the session.
+- **T5 2025 filing guide PDF**: `~/projects/personal-finance/canadian-corporation/bookkeeping/taxes/T5_2025_Filing_Guide.pdf` (3 pages, has all the box numbers + step-by-step Web Forms walkthrough)
+- **2024 T5 (template)**: `~/projects/personal-finance/canadian-corporation/bookkeeping/taxes/T5_2024_Submission_27679135.pdf` + the `.xml` next to it
+- **2024 T1**: `~/projects/personal-finance/canada-income-tax/2024/Pedro_T1_2024.pdf` (line 15000 = 34500, line 12000 = 34500 — already verified for CRA identity check; SIN visible top-right of page 1, ends in 386)
+- **CRA Program Account (corp)**: `755367752RZ0001`
+- **Filer/payer name field convention** (matches 2024): "Pedro Moyses Delfino" (not "15811856 Canada Inc." — technically wrong but consistent with last year, don't fix mid-flow)
 
-## Surprises / things to remember
+## Key 2025 dividend math
 
-- `find` in the Bash tool runs as a **zsh shell function** (from `~/.claude/shell-snapshots/snapshot-zsh-*.sh`), NOT `/usr/bin/find`. Scripts invoked via bash use real BSD `/usr/bin/find` which has different date-parsing. This caused the original hook bug — relevant to life-ops #57 (config audit).
-- BSD find silently truncates ISO 8601 datetimes with `T` separator to just the date part. Use space separator. Documented in the hook script comment as a permanent reminder.
-- slidesmith bundle: 3.4 MB main + lazy Shiki grammar chunks. Intentional — offline is the product. Don't code-split this.
-- Personal Anthropic Console is on "Evaluation access" tier. M2 (LLM-picked icons) requires upgrade to commercial billing before it can be used in any meaningful workflow.
-- GoDaddy domain forwarding doesn't preserve path. `ledayclub.com/events` → `leday.club/`. If path-preserve becomes important, migrate DNS to Cloudflare and use a Bulk Redirect rule with wildcard. Out-of-scope until it bites.
+| Box | Value |
+|---|---|
+| 10 — Actual amount, non-eligible | $37,000.00 |
+| 11 — Taxable amount (× 1.15) | $42,550.00 |
+| 12 — Federal DTC (Box 11 × 9.0301%) | $3,842.31 |
+| 21 — Report code | O (Original) |
+| 23 — Recipient type | 1 (individual) |
+
+## Carry-over from older handoffs (still relevant)
+
+- **slidesmith** project still active at `~/projects/slidesmith` — M1.5 Fireship-format polish was last work; M2 (LLM-picked icons) blocked on personal Anthropic billing tier upgrade.
+- **le-day-club Demo #0**: still May 23, 2026 deadline. Critical-chain items in #73 + #85.
+- `find` in the Bash tool runs as zsh shell function, NOT /usr/bin/find. BSD find silently truncates ISO 8601 with `T` separator. Documented in `~/.claude/settings.json` hook scripts.
+- GoDaddy domain forwarding for ledayclub.com → leday.club doesn't preserve path. Migrate to Cloudflare if it bites.
