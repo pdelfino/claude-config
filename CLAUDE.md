@@ -6,8 +6,17 @@ When you give me a command to copy and paste into a terminal (iTerm2), it **must
 
 - No backslash-newline continuations.
 - No `<placeholder>` — look up the real value and inline it (e.g. real Heroku app name, real secret, real UUID).
-- If the command would exceed ~100 characters and risk iTerm2 paste-wrap breaking it, write it to a short shell script (e.g. `/tmp/<task>.sh`) and give me a short `bash /tmp/<task>.sh` to paste instead.
 - Applies to `heroku`, `gcloud`, `curl`, `kubectl`, `gh`, `git`, shell pipelines, etc.
+
+For anything that doesn't fit on one short line — heredocs, multi-stage pipelines, multi-line commit message bodies, anything > ~100 chars — use the **slap-temp** convention instead of giving me a multi-line block:
+
+1. Slugify a 3–5 word kebab-case description.
+2. Archive the script body to `~/.claude/slap-temp/history/<YYYY-MM-DD-HHMMSS>-<slug>.sh` — never overwritten, permanent record.
+3. Append a `write` entry to `~/.claude/slap-temp/history.log` (tab-separated: `iso-timestamp\twrite\tcwd\tslug\tarchive-filename`).
+4. Overwrite `~/.claude/slap-temp/pending.sh` with the same body, prefixed by `#!/usr/bin/env bash`, `set -euo pipefail`, and `echo "→ <one-line summary>"`.
+5. Tell me to run `slap-temp` (the wrapper at `~/.local/bin/slap-temp` executes whatever is staged and logs the run).
+
+Full protocol with example: `~/.claude/skills/slap-temp/SKILL.md`. **Never put secrets** (API keys, tokens, passwords) in slap-temp — they get archived forever; for those, give me the inline command instead.
 
 ## Session handoff across sessions (every project)
 

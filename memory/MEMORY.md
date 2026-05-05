@@ -7,6 +7,10 @@
 
 ## User
 - [Anthropic accounts and API keys](anthropic_accounts.md) — personal vs Tallyfor org IDs + named env vars in `~/.secure_env_vars`
+- [Canadian immigration / corp status](user_canadian_status.md) — PR working toward citizenship, federal corp 15811856, recent ON→QC move
+
+## Repos & routing
+- [Where to file ideas vs commitments](repo_routing_for_ideas.md) — notes = exploratory superset; life-ops = commitments; ideias is archived
 
 ## Session handoff
 - [Rolling session handoff](project_session_handoff.md) — what shipped last session, what to verify, what's next

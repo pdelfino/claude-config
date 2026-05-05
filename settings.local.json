@@ -26,7 +26,12 @@
       "Bash(/bin/cat ~/.claude/hooks/announce-new-documents.sh)",
       "Bash(echo \"\\(script exit: $?\\)\")",
       "mcp__browsermcp__browser_snapshot",
-      "mcp__browsermcp__browser_click"
+      "mcp__browsermcp__browser_click",
+      "mcp__claude_ai_Gmail__list_labels",
+      "mcp__claude_ai_Gmail__search_threads",
+      "mcp__claude_ai_Gmail__label_thread",
+      "mcp__claude_ai_Gmail__unlabel_thread",
+      "mcp__claude_ai_Gmail__get_thread"
     ],
     "deny": [
       "Bash(gh pr merge:*)",
