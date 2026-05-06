@@ -1,5 +1,9 @@
 Codex will review your output once you are done.
 
+## Org-mode is the default markup
+
+Whenever there's a choice between Org-mode (`.org`) and Markdown (`.md`) — new files, duplicates, format conversions — use Org. Markdown is allowed when an external tool requires it (GitHub auto-renders both, but a static-site generator or package manifest might pin to `.md`); otherwise prefer `.org`. When a project has both a stale `README.org` and a current `README.md`, convert the `.md` content to Org and delete the `.md`.
+
 ## Terminal commands for the user to paste
 
 When you give me a command to copy and paste into a terminal (iTerm2), it **must** be a single physical line — all env-vars, flags, and values inlined with spaces.

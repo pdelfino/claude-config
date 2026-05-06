@@ -1,66 +1,87 @@
-#+TITLE: Claude Config
+#+TITLE: claude-config
 #+AUTHOR: Pedro Delfino
-#+DESCRIPTION: The leash I keep my AI on.
+#+OPTIONS: toc:nil num:nil
+
+[[file:painting.jpg]]
+
+/"Pygmalion and Galatea" (c. 1890) by Jean-Léon Gérôme — [[https://en.wikipedia.org/wiki/Pygmalion_and_Galatea_(G%C3%A9r%C3%B4me)][Wikipedia]]/
+
+*The leash I keep my AI on. Of course, Emacs biased.*
+
+* About
+
+Configuration files for [[https://docs.anthropic.com/en/docs/claude-code][Claude Code]] (Anthropic's CLI coding assistant), designed around two principles: let the AI do everything locally, but never let it touch anything public without asking first. Emacs keybindings are non-negotiable.
 
 * What's Here
 
-*keybindings.json* - Because I refused to unlearn several years of
-Emacs muscle memory. =Ctrl+X Ctrl+E= or death.
+| File                  | Purpose                                                                                                                          |
+|-----------------------+----------------------------------------------------------------------------------------------------------------------------------|
+| =keybindings.json=    | Emacs-style keybindings -- =Ctrl+X Ctrl+E= for external editor, =Ctrl+P/N= for history, =Ctrl+X Ctrl+S= to stash                 |
+| =settings.json=       | Global permissions for the home directory scope -- all tools allowed, with denials for push/deploy/publish. Sound-notification hooks. |
+| =settings.local.json= | Project-level permissions with broader wildcards, Clojure MCP tool access, and frontend/backend REPL servers                     |
+| =memory/=             | Claude's auto-generated memory files, symlinked from =~/.claude/projects/=                                                       |
+| =CLAUDE.md=           | Global instructions (terminal-command rules, slap-temp protocol, session handoff, org-over-md preference)                        |
 
-*settings.json* - Global permissions for the home directory scope.
-All tools allowed except pushing, deploying, and publishing. Also
-configures hooks for sound notifications (gong on stop, looping ring
-on waiting for input, knock sound when asking a question) and Slack
-pings when Claude needs attention.
+* The Permission Model
 
-*settings.local.json* - Project-level permissions with broader
-wildcards, explicit Clojure MCP tool access, and enabled MCP JSON
-servers for frontend/backend REPLs.
+| Claude Can           | Claude Cannot               |
+|----------------------+-----------------------------|
+| Read anything        | =git push=                  |
+| Write anything       | Deploy to prod              |
+| Run any command      | Merge PRs                   |
+| Delete files locally | =npm publish= / =yarn publish= |
+| Break things locally | Break things publicly       |
 
-*memory/* - Claude's auto-memory files. Symlinked from
-=~/.claude/projects/-Users-pedro/memory=. Where Claude writes down
-what it learned so it doesn't make the same mistakes twice. In theory.
+The philosophy: make all the mess you want in my house, just don't invite the neighbors to see it.
 
-* Philosophy
+* Sound Notifications
 
-#+BEGIN_SRC javascript
-  if (action.isLocal && action.isReversible) { return "go wild, robot
-    friend"; } else if (action.couldEmbarrassMePublicly) { return "let's
-    talk about this first"; }
-#+END_SRC
+The config uses macOS =afplay= hooks to provide audio feedback:
+
+- *Gong* -- plays when Claude stops (task complete)
+- *Knock* -- plays when Claude asks a question
+
+This pairs well with background workflows -- start a task, switch to another window, and let your ears tell you when Claude needs attention.
+
+* Keybindings
+
+All bindings follow Emacs conventions:
+
+| Key             | Action                                |
+|-----------------+---------------------------------------|
+| =Ctrl+X Ctrl+E= | Open prompt in external editor (Emacs) |
+| =Ctrl+X Ctrl+S= | Stash current chat                    |
+| =Ctrl+P=        | Previous history entry                |
+| =Ctrl+N=        | Next history entry                    |
+| =Ctrl+X Ctrl+T= | Toggle todos                          |
 
 * Installation
 
-#+BEGIN_SRC bash
-  git clone git@github.com:pdelfino/claude-config.git
-  ~/projects/claude-config ln -sf
-  ~/projects/claude-config/keybindings.json ~/.claude/keybindings.json
-  ln -sf ~/projects/claude-config/settings.json
-  ~/.claude/settings.json
-  ln -sf ~/projects/claude-config/settings.local.json
-  ~/.claude/settings.local.json
-  ln -sf ~/projects/claude-config/memory
-  ~/.claude/projects/-Users-pedro/memory
-#+END_SRC
+#+begin_src bash
+git clone git@github.com:pdelfino/claude-config.git ~/projects/claude-config
 
-* The Deal
+ln -sf ~/projects/claude-config/keybindings.json   ~/.claude/keybindings.json
+ln -sf ~/projects/claude-config/settings.json      ~/.claude/settings.json
+ln -sf ~/projects/claude-config/settings.local.json ~/.claude/settings.local.json
+ln -sf ~/projects/claude-config/CLAUDE.md          ~/.claude/CLAUDE.md
 
-| Claude Can           | Claude Cannot            |
-|----------------------+--------------------------|
-| Read anything        | =git push=               |
-| Write anything       | Deploy to prod           |
-| Run any command      | Merge PRs                |
-| Delete my files      | Mass destruction via k8s |
-| Break things locally | Break things publicly    |
+mkdir -p ~/.claude/projects/-Users-pedro
+ln -sf ~/projects/claude-config/memory ~/.claude/projects/-Users-pedro/memory
+#+end_src
 
-Basically: make all the mess you want in my house, just don't invite
-the neighbors to see it.
+* Requirements
+
+- [[https://docs.anthropic.com/en/docs/claude-code][Claude Code]] CLI installed
+- macOS (for =afplay= sound hooks)
+- Emacs muscle memory (optional but assumed)
 
 * Related
 
-- [[https://github.com/pdelfino/emacs-config][emacs-config]] - The Emacs setup this config rides on top of
-- [[https://github.com/pdelfino/karabiner-config][karabiner-config]] - Emacs keybindings system-wide on macOS
-- [[https://github.com/pdelfino/homerow-config][homerow-config]] - Click things without a mouse
-- [[https://github.com/pdelfino/iterm2-config][iterm2-config]] - iTerm2 terminal profile
-- [[https://github.com/pdelfino/zshrc][zshrc]] - Where I also force Emacs bindings on everything
-- [[https://github.com/pdelfino/macos-setup][macos-setup]] - The bootstrap that ties it all together
+- [[https://github.com/pdelfino/emacs-config][emacs-config]] -- The Emacs setup this config rides on top of
+- [[https://github.com/pdelfino/karabiner-config][karabiner-config]] -- Emacs keybindings system-wide on macOS
+- [[https://github.com/pdelfino/zshrc][zshrc]] -- Shell config where =CLAUDE_SLACK_WEBHOOK_URL= lives
+- [[https://github.com/pdelfino/macos-setup][macos-setup]] -- The bootstrap that ties it all together
+
+* License
+
+Personal configuration -- use freely.
