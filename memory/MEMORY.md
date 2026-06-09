@@ -11,6 +11,19 @@
 
 ## Repos & routing
 - [Where to file ideas vs commitments](repo_routing_for_ideas.md) — notes = exploratory superset; life-ops = commitments; ideias is archived
+- ["Learn and try X" → life-ops](feedback_routing_learn_and_try.md) — specific named tool/repo to try is a commitment, not exploration
+
+## Decisions
+- [Solo filings 2026](decisions_solo_filings_2026.md) — no CPA on Canadian taxes, no lawyer on LDC waiver (as of 2026-05-08)
+
+## Corp tax accounts
+- [GST/HST registration active 2026](gst_hst_registration_2026.md) — RT0001 effective 2026-04-09; first return due 2027-03-31; ITCs claimable
+
+## Personal tax (T1)
+- [$150 unallocated CRA credit](cra_150_unallocated_credit.md) — overpaid 2026-05-01 on purpose; leave it to offset the 2026 T1, verify it applied when filing (early 2027)
+
+## Style & preferences
+- [No em-dashes](feedback_no_em_dashes.md) — treats them as an AI tell; use periods/commas/parens, ` · ` to join titles
 
 ## Session handoff
 - [Rolling session handoff](project_session_handoff.md) — what shipped last session, what to verify, what's next

@@ -39,7 +39,7 @@ After that: send **TALLYF-0028** to Peter Wen ($5k unbilled revenue, 5 min email
 16. **CBCA AR 2025 + AR 2026 BOTH FILED + PAID** ($24 CAD total via ISED). Confirmation emails received in corp Gmail. **#61 CLOSED.**
 17. **ISC register name corrected**: "Pedro Delfino" → "Pedro Moyses Delfino" during AR 2025 wizard. Cleaner audit trail.
 18. New folders + READMEs: `annual-returns/` (with 2025/, 2026/ subfolders) and `isc-register/`. Both with naming convention READMEs.
-19. **GST/HST verification done via CRA MBA**: BN 755367752 has only RC0001 + RZ0001 — NO RT0001 → corp NOT registered for GST/HST → no surprise penalties. **#87 CLOSED.**
+19. **GST/HST verification done via CRA MBA**: BN 755367752 has only RC0001 + RZ0001 — NO RT0001 → corp NOT registered for GST/HST → no surprise penalties. **#87 CLOSED.** ⚠️ **SUPERSEDED 2026-05-08**: Pedro applied for RT0001 on 2026-05-05; CRA approved 2026-05-08 effective 2026-04-09. See `gst_hst_registration_2026.md` memory. #87 closure is obsolete.
 20. **MAJOR FINDING: T2 FY2024 prepayment located in BMO Apr 30, 2025 statement** — $15,200 CAD paid via 2 PADs on 2025-04-23 (descriptor `CANADA TXD/DIM`). Risk math: late-filing penalty = $0 (paid before filing deadline), arrears interest ~$100 (paid 23 days late vs balance-due). Risk profile MUCH smaller than original framing. **#62 + #92 updated.**
 21. **Accountant brief sent**: Pedro emailed `gurpreet@hawleychatwal.com` (Hawley Chatwal) at 17:06 EDT from p.delfino01@gmail.com. Existing contact, not cold. Reply pending. **#62 updated.**
 22. **Email archive complete** — 131 corp Gmail threads (May 2024 → May 2026) at `personal-finance/canadian-corporation/email-archive/`. Idempotent re-run.

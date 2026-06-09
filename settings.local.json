@@ -8,7 +8,6 @@
       "WebFetch(*)",
       "WebSearch",
       "Skill(*)",
-      "mcp__*",
       "mcp__clojure-mcp__list_nrepl_ports",
       "mcp__clojure-mcp__clojure_inspect_project",
       "mcp__clojure-mcp__clojure_eval",
@@ -31,7 +30,14 @@
       "mcp__claude_ai_Gmail__search_threads",
       "mcp__claude_ai_Gmail__label_thread",
       "mcp__claude_ai_Gmail__unlabel_thread",
-      "mcp__claude_ai_Gmail__get_thread"
+      "mcp__claude_ai_Gmail__get_thread",
+      "mcp__claude_ai_Google_Calendar__create_event",
+      "Bash(pdflatex -interaction=nonstopmode reconciliation_2025-09_to_2026-04.tex)",
+      "Bash(/bin/ls -la reconciliation_2025-09_to_2026-04.pdf)",
+      "Bash(\\\\rm -f reconciliation_2025-09_to_2026-04.aux reconciliation_2025-09_to_2026-04.log)",
+      "Bash(pdflatex -interaction=nonstopmode letter-to-peter-reconciliation-and-memo.tex)",
+      "Bash(\\\\rm -f letter-to-peter-reconciliation-and-memo.aux letter-to-peter-reconciliation-and-memo.log)",
+      "Bash(/bin/ls -la letter-to-peter-reconciliation-and-memo.pdf)"
     ],
     "deny": [
       "Bash(gh pr merge:*)",
