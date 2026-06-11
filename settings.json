@@ -18,12 +18,18 @@
     "deny": [
       "Bash(git push --force*)",
       "Bash(gh pr merge*)",
-      "Bash(*deploy*)",
+      "Bash(*make deploy*)",
+      "Bash(*npm run deploy*)",
+      "Bash(*yarn deploy*)",
+      "Bash(*wrangler deploy*)",
+      "Bash(*wrangler publish*)",
+      "Bash(*gh workflow run*)",
       "Bash(*npm publish*)",
       "Bash(*yarn publish*)"
     ],
     "defaultMode": "bypassPermissions"
   },
+  "model": "claude-fable-5",
   "hooks": {
     "Stop": [
       {
@@ -77,10 +83,10 @@
       }
     ]
   },
-  "model": "claude-fable-5",
-  "effortLevel": "high",
-  "skipDangerousModePermissionPrompt": true,
   "enabledPlugins": {
-    "posthog@claude-plugins-official": true
-  }
+    "posthog@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true
+  },
+  "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true
 }

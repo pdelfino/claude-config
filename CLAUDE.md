@@ -22,6 +22,13 @@ For anything that doesn't fit on one short line — heredocs, multi-stage pipeli
 
 Full protocol with example: `~/.claude/skills/slap-temp/SKILL.md`. **Never put secrets** (API keys, tokens, passwords) in slap-temp — they get archived forever; for those, give me the inline command instead.
 
+## NEVER use markdown blockquotes (`>`)
+
+Blockquotes render in the terminal with a `▎` bar prefixed to every line, and copying the text grabs the bars too, mangling the paste. This applies to ALL output, and doubly to anything Pedro is meant to copy somewhere (form text, email bodies, justificativas, drafts):
+
+- Text meant for copy-paste goes in a fenced code block (```text), which copies clean.
+- Quoting someone or a document: use italics or inline quotes, never `>`.
+
 ## Session handoff across sessions (every project)
 
 Every project Claude Code runs in should accumulate a rolling handoff in its auto-memory: `project_session_handoff.md` in `~/.claude/projects/<sanitized-cwd>/memory/`. The file captures *semantic* state — what last shipped, what's pending, what to verify — so the next session can pick up without re-interrogating the user.
