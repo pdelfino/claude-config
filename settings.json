@@ -38,6 +38,14 @@
             "command": "afplay /Users/pedro/.claude/sounds/gong.wav &"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/hooks/copy-to-clipboard.sh\""
+          }
+        ]
       }
     ],
     "PreToolUse": [

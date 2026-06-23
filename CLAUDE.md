@@ -29,6 +29,18 @@ Blockquotes render in the terminal with a `▎` bar prefixed to every line, and 
 - Text meant for copy-paste goes in a fenced code block (```text), which copies clean.
 - Quoting someone or a document: use italics or inline quotes, never `>`.
 
+## Auto-copy: the `copy` fence
+
+A Stop hook (`~/.claude/hooks/copy-to-clipboard.sh`) watches every reply: if the final message contains a fenced code block whose info string is `copy` (i.e. triple-backtick immediately followed by the word copy), the hook pipes that block's contents straight to the macOS clipboard, where Maccy captures it. The terminal shows "Copied the marked block to your clipboard (Maccy has it)" when it fires.
+
+So when you produce exactly one piece of data Pedro will paste somewhere else (a single-line terminal command, a UUID/key reference, a one-off SQL statement, a form value, an email or message body, a drafted paragraph), put that one payload in a `copy` fence instead of a plain `text` fence. It still renders and copies clean like `text`, and it lands in his clipboard automatically.
+
+Rules:
+- At most ONE `copy` block per message. If several exist, the hook copies the LAST one, so never scatter them. Mark the single most important payload; everything else stays in `text` fences.
+- Default to `text`, not `copy`. Use `copy` only when there's a clear, singular "paste this elsewhere" intent. Reserved data that Pedro just reads stays in `text`.
+- NEVER put a secret (API key, token, password) in a `copy` block. Maccy keeps clipboard history, so the secret would persist there. This is the same boundary as the never-echo-secrets rule. Secrets still go inline per the slap-temp protocol.
+- This does not replace the single-physical-line rule for terminal commands. A one-line command in a `copy` fence is fine (still one physical line); anything multi-line or long still uses slap-temp.
+
 ## Session handoff across sessions (every project)
 
 Every project Claude Code runs in should accumulate a rolling handoff in its auto-memory: `project_session_handoff.md` in `~/.claude/projects/<sanitized-cwd>/memory/`. The file captures *semantic* state — what last shipped, what's pending, what to verify — so the next session can pick up without re-interrogating the user.
