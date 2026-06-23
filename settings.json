@@ -29,7 +29,6 @@
     ],
     "defaultMode": "bypassPermissions"
   },
-  "model": "claude-fable-5",
   "hooks": {
     "Stop": [
       {
@@ -48,6 +47,15 @@
           {
             "type": "command",
             "command": "afplay /Users/pedro/.claude/sounds/knock.wav &"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/hooks/block-secret-literals.sh\""
           }
         ]
       }
@@ -88,5 +96,6 @@
     "frontend-design@claude-plugins-official": true
   },
   "effortLevel": "high",
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "tui": "fullscreen"
 }
