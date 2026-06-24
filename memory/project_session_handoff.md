@@ -2,31 +2,37 @@
 name: Rolling session handoff (cwd=/Users/pedro)
 description: Semantic snapshot of what shipped this session, what's pending, what to verify next
 type: project
-originSessionId: 2026-06-11-overnight-ui-design-pass
+originSessionId: 2026-06-23-transcripts-and-clipboard-hook
 ---
-# Session handoff, 2026-06-11 overnight + morning (LDC UI design pass, reworked after Pedro's review)
-
-**Morning update:** Pedro reviewed and called the PR ugly; the XKCD influence had to be self-contained. Rework shipped in `ed789a2`: removed wobble SketchFrame borders (component deleted), paper grain, sun logo draw-in, and the terracotta contact band. Kept Alegreya h1/h2, staggered hero reveal, dawn gradient (flagged to Pedro as a judgment call, easy revert via `hero-dawn`), `--header` var, ClockIcon fix. Full gauntlet re-run green, CI green on `ed789a2`. Taste rule saved as [[feedback-xkcd-contained]]. The overnight details below describe the ORIGINAL scope; read them through that filter.
+# Session handoff, 2026-06-23 (YouTube transcripts + clipboard hook)
 
 ## What shipped this session
+- **YouTube transcripts pipeline.** Pulled English auto-captions (yt-dlp, no video download) for 8 System Crafters Live videos from the open Brave tabs, cleaned + reflowed into 80-col Org paragraphs. Saved to `pdelfino/notes` under `transcripts/system-crafters/` (8 `.org` + `index.org`), committed on branch `transcripts/system-crafters` and **pushed to origin** (PR/merge to main still optional). Raw single-line `en-orig` sources stay in `~/yt-transcripts/`; the `.en.txt` duplicates were deleted. Staged via slap-temp (archive `2026-06-23-160324-youtube-tabs-to-transcripts.sh`).
+- **`.secure_env_vars` cleanup (this machine).** Added missing `export` to INTERNAL_TRIGGER_SECRET / ADMIN_GONG_SECRET / EMAIL_WORKER_URL, deleted stale commented-out secrets, deduped EMAIL_WORKER_URL -> `$NEXT_PUBLIC_EMAIL_WORKER_URL`. Backup: `~/.secure_env_vars.bak-20260623-151032`. Not under git (correct for a secrets file).
+- **Auto-copy clipboard feature.** New Stop hook `~/.claude/hooks/copy-to-clipboard.sh` copies a ```copy fenced block from the final reply to the macOS clipboard (Maccy). Wired into `claude-config/settings.json` Stop array (alongside the gong); convention documented in `claude-config/CLAUDE.md`.
+- **Contacts.** Added 13 Football & Pilates (`soccer-1`) attendees to macOS Contacts (last-name " LDC" suffix + company=LDC), deduped against existing by phone (15 already present, skipped).
+- **life-ops#245** filed (hair-on-fire, tech-setup, type:errand): sync `.secure_env_vars` on the OLD MacBook with this machine's cleanup; includes a reminder to rotate the deleted tokens at their providers if still live.
 
-1. **frontend-design plugin installed** (claude-plugins-official) + audit doc `docs/ui-improvement-possibilities.org` in le-day-club: full backlog of UI possibilities (typography, motion, texture, color, composition).
-2. **Issue #472 + PR #473** (`ui-design-pass-472`, ready for review, NOT merged on purpose, Pedro reviews in the morning). 4 commits: audit doc; design pass; ClockIcon fix; font-var + ContactChoice fixes. Design pass = Alegreya serif h1/h2 sitewide (cyrillic subsets for uk), CSS-only staggered hero reveal, header sun logo draws itself (pathLength trick), SketchFrame wobble borders (stat tiles + NerdyCards), paper grain overlay, dawn gradient hero, golden-hour contact band (`--accent-deep`, AA-checked 5.9:1), `--header` var replacing hardcoded #0a0a0a. All motion behind prefers-reduced-motion.
-3. **#474 filed + fixed in the PR**: ClockIcon SVG arc emitted raw Math.cos/sin doubles; V8 vs JavaScriptCore last-bit drift = hydration mismatch on iPhone Safari, flaky iphone-15 smoke tests. Rounded to 3 decimals. Same latent pattern noted in AboutUsIllustration/PaqIllustration.
-4. **#475 filed (NOT fixed)**: two e2e failures exist on clean main (verified by stash + re-run): by.spec referral beacon (all 3 browsers) and iphone-15 language-toggle hang.
-5. **Testing done**: lint/typecheck/vitest 985/build 162 pages green; e2e 88 passed with only the #475 pre-existing failures; visual matrix (10 scenarios: mobile 390x844 + desktop, light + dark, EN/FR/PT/UK, about, events, reduced-motion) zero console errors. Two real bugs were caught visually: @theme inline does not emit custom properties (heading font silently fell back to Geist) and ContactChoice white-on-white on the band.
-
-## Verify at next session start
-
-1. **PR #473 CI**: typecheck + no-em-dash passed; lint/test/build were pending at handoff. Also watch walkthrough.yml (known to fail on every push since the header commit, still undiagnosed, carried from last session).
-2. **Pedro's verdict on the design direction** before touching the out-of-scope list (EventCard ticket-stub, /by/<handle> pass, night-club dark mode gag).
-3. Screenshots for his review: `~/Documents/ui-design-pass-472/` (16 PNGs, detail-* are close-ups).
-4. Dev server PID 49660 on :3000 predates this session and was reused, not restarted.
-5. Carried from previous session: DMARC rua reports due ~Jun 13-14 at dmarc@leday.club; **p=reject promotion due ~Jun 25 (untracked elsewhere)**; #467 Pedro's real-iPhone check; #363/#371 phone QA; stale CLOUDFLARE_API_TOKEN in ~/.secure_env_vars line ~94 still shadows wrangler OAuth.
+## Verify / pending next session
+1. **`claude-config` has UNCOMMITTED changes**: `settings.json` + `CLAUDE.md` (the clipboard-hook work). The hook script `~/.claude/hooks/copy-to-clipboard.sh` is NOT tracked in the repo (same open question as `block-secret-literals.sh` / `announce-new-documents.sh`). Decide whether to commit/track so it syncs to the other Mac.
+2. **Clipboard hook activation**: may need a `/hooks` reload or restart to be live this session (settings watcher only watches dirs that had a settings file at session start).
+3. **notes** branch `transcripts/system-crafters` pushed but not merged to main.
+4. **Stripe old-key retirement (life-ops#231, was due ~2026-06-24)**: confirm old `sk_live_…CimQ` expired and old webhook secret `whsec_…Ml3B` retired (last two open boxes, comment 4781297041). Local/dashboard check; with the Stripe MCP installed, verify via `mcp__stripe__*` or a dashboard glance.
+5. **Stripe MCP**: launcher `~/.claude/bin/stripe-mcp.sh` reads `STRIPE_LIVE_SECRET_KEY` from `~/.secure_env_vars` at runtime (no secret in `~/.claude.json`). `mcp__stripe__*` tools load on session start. Full live key + `--tools=all` (can refund/charge live) — could scope to a restricted key later. Local-only, not synced.
+6. **service_role**: consciously DEFERRED (zero JWT hits in any log). Don't rotate casually (logs out all LDC users + invalidates anon key).
 
 ## Next tractable work
+- Discuss the System Crafters transcripts (user wants productivity improvements). Most on-point: "Wiring Claude Code Into Emacs" and "Crafting an AI-Driven Workflow System".
+- As concrete "I'll try X" items surface from the transcripts, file each as a `life-ops` issue (`type:decision, tech-setup`) per the learn-and-try routing rule. Raw reference -> notes, commitments -> life-ops.
+- Resolve life-ops#245 on the old MacBook.
+- Optional: separate lower-priority `tech-setup` issue for a Keychain/1Password single-source-of-truth to kill the per-machine `.secure_env_vars` drift.
 
-- After #473 review: regenerate the walkthrough snapshot library (`npm run walkthrough`), it is stale vs the new UI.
-- #475 (two pre-existing e2e failures), #469 FR header overflow (primary market!), #470 pixel-8 device fix.
-- #461 remaining: #297 payments E2E (needs Stripe test keys from Pedro), OAuth consent #277/#265 (drop everything), #121 descriptor.
-- Events: next is soccer-1 Football & Pilates 2026-06-20 (DB is source of truth).
+## Carried over (status UNVERIFIED, confirm before acting)
+- **Sahil promoter half-done/uncommitted**: prod DB had promoter `unnaturaltm` + shift rows + ledger `20260619170000` but no migration file / no promoters.ts entry. Decide: roll back the 4 DB rows OR finish him. Paid ticket ($31.50) untouched.
+- **Facebook unblock not live**: `~/projects/etc-hosts/hosts` edited but `/etc/hosts` unchanged. Run `bash ~/projects/etc-hosts/sync.sh` (sudo).
+- **#528 board activation**: toggle Auto-add + Item-added→Backlog in Projects UI, then delete `.github/workflows/add-to-project.yml`.
+- **Tax/legal Tier 4** (#452 HST, #454 QST): live exposure on tickets selling now.
+
+## Hard-won lessons
+- Do NOT apply le-day-club migrations via Supabase MCP `apply_migration` (version mismatch freezes prod deploys). Use `supabase db push`; confirm `gh run list --workflow=deploy.yml` green after a push. See [[ldc-migrations-no-mcp-apply]].
+- `cp`/`mv` are aliased interactive in Pedro's shell: they prompt and silently no-op in non-interactive Bash. Use `cat > target` or `/bin/cp -f` when scripting overwrites.
