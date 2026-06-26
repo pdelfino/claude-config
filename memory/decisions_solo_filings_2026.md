@@ -19,7 +19,7 @@ Demo #0 on 2026-05-23.
   interest exposure to ~$100. Late-filing penalty = $0 because both
   prepayments cleared before the filing deadline.
 - Pedro's beancount books are extensive (sanity checks 13/15 PASS,
-  TaxTron working paper at `personal-finance/.../FY2025 T2 prep`),
+  TaxTron working paper at `life-admin/.../FY2025 T2 prep`),
   bringing the marginal value of a CPA down toward zero on this
   fact pattern.
 - The waiver is bilingual and already shipped (`make
